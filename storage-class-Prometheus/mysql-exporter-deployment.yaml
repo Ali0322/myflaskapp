@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-exporter
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-exporter
+  template:
+    metadata:
+      labels:
+        app: mysql-exporter
+    spec:
+      containers:
+      - name: mysql-exporter
+        image: prom/mysqld-exporter:latest
+        ports:
+        - containerPort: 9104
+        env:
+        - name: DATA_SOURCE_NAME
+          value: "admin:admin@(mysql.default.svc.cluster.local:3306)/"         # Adjust the user credentials as needed
+        # If using a different database, adjust the `DATA_SOURCE_NAME` accordingly

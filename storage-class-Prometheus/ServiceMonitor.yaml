@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: two-tier-app-pod-monitor
+  namespace: prometheus  # Namespace where Prometheus is running
+spec:
+  selector:
+    matchLabels:
+      app: two-tier-app  # Ensure this matches the labels of your Service
+  endpoints:
+  - port: http  # Match the name of the port in the Service
+    path: /metrics
+    interval: 15s
+  namespaceSelector:
+    matchNames:
+    - default  # Namespace where your application pod is running

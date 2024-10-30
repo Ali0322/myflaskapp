@@ -19,7 +19,7 @@ spec:
         image: ali0322/flaskapp:latest
         env:
         - name: MYSQL_HOST
-          value: "mysql"  # Ensure this matches your MySQL service name
+          value: "10.98.2.37"  # Ensure this matches your MySQL service IP
         - name: MYSQL_PASSWORD
           value: "admin"
         - name: MYSQL_USER
